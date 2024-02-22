@@ -1,0 +1,16 @@
+export const blogPostTags = [
+  { id: 1, name: "Security Tips" },
+  { id: 2, name: "Cybersecurity" },
+  { id: 3, name: "Data Privacy" },
+  { id: 4, name: "Threat Intelligence" },
+  { id: 5, name: "Security Best Practices" },
+  { id: 6, name: "Incident Response" },
+  { id: 7, name: "Digital Forensics" },
+  { id: 10, name: "Phishing Awareness" },
+  { id: 11, name: "Network Security" },
+  { id: 13, name: "Security Compliance" },
+  { id: 14, name: "Security Training" },
+  { id: 15, name: "Academic Security" },
+  { id: 16, name: "Campus Safety" },
+  { id: 17, name: "Emergency Preparedness" },
+];

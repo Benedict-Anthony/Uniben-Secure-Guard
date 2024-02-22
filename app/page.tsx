@@ -1,113 +1,112 @@
-import Image from "next/image";
+import { keyFeatures } from "@/data/keyFeatures";
+import { whySubscribe } from "@/data/newsLetter";
+import { whyChooseSecureGuard } from "@/data/whyChooseSecureGuard";
+import Link from "next/link";
+import React, { Fragment } from "react";
 
-export default function Home() {
+function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <Fragment>
+      <main className="home">
+        <section className="px-2 md:px-4 py-1 container flex flex-col justify-start items-start text-light z-10 relative">
+          <div className="w-full md:w-[700px] mt-5 ">
+            <h1 className="text-3xl text-center md:text-left md:text-5xl font-bold md:leading-[4rem]">
+              Welcome to{" "}
+              <span className="text-darkRed">Uniben SecureGuard: {"  "}</span>
+              Your Trusted Security Partner
+            </h1>
+            <p className="text-center md:text-left md:leading-8 mt-5 md:text-xl">
+              At Uniben SecureGuard, we understand the importance of a secure
+              and resilient environment within Uniben. Our cutting-edge Security
+              and Information Report System provide you with the tools and
+              insights needed to safeguard your assets and data.
+            </p>
+          </div>
+          <button className="btn btn-lg btn-primary mt-10">
+            <Link href={"/category"}>Report Now</Link>
+          </button>
+        </section>
+      </main>
+
+      <section className="bg-gray-100">
+        <div className="container mx-auto relative md:-mt-20 z-10 bg-gray-300 px-3 py-2 drop-shadow-md shadow-md rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between items-center gap-4">
+          {keyFeatures.map((item) => (
+            <div
+              className="w-full h-32 bg-light shadow-xl flex flex-col justify-center items-center gap-2"
+              key={item.id}
+            >
+              <div className="px-4 pt-5 text-4xl">{item.icon}</div>
+              <div className=" items-center text-center">
+                <h2 className="text-md font-semibold">{item.title}</h2>
+                {/* <p>{item.description}</p> */}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <section className="my-10 container mx-auto">
+        <h1 className="font-bold text-center text-3xl mb-7 text-darkRed">
+          Why Choose Us
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-4">
+          {whyChooseSecureGuard.map((item) => (
+            <div
+              className="shadow-inner bg-white my-3 p-3 flex justify-center items-center flex-col"
+              key={item.id}
+            >
+              <div className="flex flex-col justify-center items-center">
+                <h3 className="text-3xl">{item.icon}</h3>
+                <h4 className="text-xl font-semibold">{item.point}</h4>
+              </div>
+              <div className="my-4">
+                <p className="text=xl text-center">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
+      <section className="container mx-auto flex flex-col-reverse md:flex-row justify-between gap-10 items-center mt-10 bg-gray-900">
+        <div className="shadow py-3  px-2 bg-gray-50 w-full">
+          {whySubscribe.map((item) => (
+            <div className="shadow-inner bg-white my-3 p-3" key={item.id}>
+              <h4 className="text-xl font-semibold">{item.point}</h4>
+              <div className="flex flex-row justify-start items-center my-4">
+                <h3 className="text-3xl">{item.icon}</h3>
+                <p className="text=xl">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <form action="" className="w-full text-white px-4">
+          <h1 className="text-3xl text-center md:text-left font-bold text-darkRed">
+            Subscribe to our News Letter
+          </h1>
+          <p className="text-xl my-5 text-center md:text-left">
+            Stay informed and never miss an update! Subscribe to our newsletter
+            to receive the latest news, security tips, and exclusive insights.
+            Be the first to know about new features, events, and special offers.
           </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <div className="input input-bordered flex items-center gap-2 text-gray-900 text-xl">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4 opacity-70"
+            >
+              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+            </svg>
+            <input type="text" className="grow" placeholder="Email" />
+          </div>
+          <button className="btn btn-primary mt-5 block w-full">
+            Subscribe
+          </button>
+        </form>
+      </section>
+    </Fragment>
   );
 }
+
+export default Home;
