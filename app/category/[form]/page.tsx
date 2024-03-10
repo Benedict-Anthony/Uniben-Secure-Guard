@@ -63,6 +63,7 @@ const ReportPage = ({ params: { form } }: Typesparams) => {
 
       const reports = {
         ...data,
+        addressed: false,
         date: new Date(),
         photoUrl,
         category: form.replace("%20", " "),

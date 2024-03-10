@@ -3,6 +3,7 @@ type ReportTypes = {
   location: string;
   category: string;
   photoUrl: string[];
+  addressed:boo
   title: string;
   date: {
     nanoseconds: number;

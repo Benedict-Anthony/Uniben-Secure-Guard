@@ -6,6 +6,9 @@ import Link from "next/link";
 import { deleteDoc, doc } from "firebase/firestore";
 import { database } from "@/firebase";
 import { toast } from "react-toastify";
+
+import { FaCheckCircle } from "react-icons/fa";
+
 type TableProps = {
   reports: ReportTypes[];
   isFetcthing: boolean;
@@ -37,6 +40,7 @@ const Table = ({ reports, isFetcthing }: TableProps) => {
               <th>Category</th>
               <th>Location</th>
               <th>Date</th>
+              <th>Addressed</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +56,14 @@ const Table = ({ reports, isFetcthing }: TableProps) => {
                 <td>{item.category}</td>
                 <td>{item.location}</td>
                 <td>{formatDate(item.date.seconds)}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    className="checkbox-primary checkbox"
+                    readOnly={true}
+                    checked={item.addressed}
+                  />
+                </td>
                 <td>
                   <button className="btn btn-neutral">
                     <Link href={`/admin/${item.id}`}>Details</Link>

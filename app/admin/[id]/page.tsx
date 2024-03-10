@@ -1,21 +1,47 @@
 "use client";
 import Spinner from "@/components/shared/Spinner";
-import { database } from "@/firebase";
+import { auth, database } from "@/firebase";
 import { formatDate } from "@/utils/formatDate";
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import * as yup from "yup";
 
 type Params = {
   params: {
     id: string;
   };
 };
+
+const schema = yup.object({
+  comment: yup
+    .string()
+    .min(10, "Comments should not be less that 10 charaters")
+    .max(300, "Comments should not be less than 300 charaters")
+    .required("Please this field is required"),
+});
+
+type Comments = {
+  comment: string;
+};
+
 const Details = ({ params: { id } }: Params) => {
   const [report, setReport] = useState<ReportTypes | null>(null);
+  const [user] = useAuthState(auth);
   const router = useRouter();
+  const {
+    register,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm<Comments>({
+    resolver: yupResolver(schema),
+  });
 
   const deleteReport = async () => {
     if (confirm("Are you sure you want to delete this report?")) {
@@ -27,6 +53,24 @@ const Details = ({ params: { id } }: Params) => {
       } catch (error) {}
     }
   };
+
+  async function onSubmit(data: Comments) {
+    console.log(data);
+    const { comment } = data;
+    const docRef = doc(database, "reports", id);
+    await updateDoc(docRef, {
+      addressed: true,
+      comment,
+      commentedBy: user?.displayName,
+    });
+    reset();
+    router.back();
+
+    try {
+    } catch (error) {
+      throw new Error("Something went wrong...");
+    }
+  }
   useEffect(() => {
     async function getReport() {
       try {
@@ -73,10 +117,51 @@ const Details = ({ params: { id } }: Params) => {
           </div>
         </div>
       )}
+      {report && (
+        <Fragment>
+          {/* The button to open modal */}
+          <label htmlFor="my_modal_6" className="btn">
+            Leave a comment
+          </label>
 
-      <button className="btn btn-error mt-5" onClick={deleteReport}>
-        Delete Report
-      </button>
+          {/* Put this part before </body> tag */}
+
+          <input type="checkbox" id="my_modal_6" className="modal-toggle" />
+
+          <div className="modal" role="dialog">
+            <div className="modal-box">
+              <div className="modal-action">
+                <label htmlFor="my_modal_6" className="btn btn-warning">
+                  Cancel
+                </label>
+              </div>
+              <h3 className="font-bold text-lg my-5">
+                Leave a summary of for this report!
+              </h3>
+
+              <form action="" onClick={handleSubmit(onSubmit)}>
+                <label className="form-control">
+                  <span className="text-error">{errors.comment?.message}</span>
+                  <textarea
+                    {...register("comment")}
+                    className="textarea textarea-bordered h-24 resize-none"
+                    placeholder="Bio"
+                  ></textarea>
+                </label>
+                <div className="modal-action">
+                  <button className="btn btn-primary">Comments</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button
+            className="btn btn-error mt-5 inline-block ml-5"
+            onClick={deleteReport}
+          >
+            Delete Report
+          </button>
+        </Fragment>
+      )}
     </section>
   );
 };
