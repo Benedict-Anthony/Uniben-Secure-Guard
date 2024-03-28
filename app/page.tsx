@@ -1,9 +1,10 @@
+"use client";
 import { keyFeatures } from "@/data/keyFeatures";
 import { whySubscribe } from "@/data/newsLetter";
 import { whyChooseSecureGuard } from "@/data/whyChooseSecureGuard";
 import Link from "next/link";
 import React, { Fragment } from "react";
-
+import { AnimationOnScroll } from "react-animation-on-scroll";
 function Home() {
   return (
     <Fragment>
@@ -27,9 +28,11 @@ function Home() {
           </button>
         </section>
       </main>
-
-      <section className="bg-gray-100">
-        <div className="container mx-auto relative md:-mt-20 z-10 bg-gray-300 px-3 py-2 drop-shadow-md shadow-md rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between items-center gap-4">
+      <section className="bg-gray-100 z-10">
+        <AnimationOnScroll
+          animateIn="animate__bounceIn"
+          className="container mx-auto relative md:-mt-20 z-10 bg-gray-300 px-3 py-2 drop-shadow-md shadow-md rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between items-center gap-4"
+        >
           {keyFeatures.map((item) => (
             <div
               className="w-full h-32 bg-light shadow-xl flex flex-col justify-center items-center gap-2"
@@ -42,10 +45,14 @@ function Home() {
               </div>
             </div>
           ))}
-        </div>
+        </AnimationOnScroll>
       </section>
 
-      <section className="my-10 container mx-auto">
+      <AnimationOnScroll
+        offset={3}
+        animateIn="animate__bounceIn"
+        className="my-10 container mx-auto"
+      >
         <h1 className="font-bold text-center text-3xl mb-7 text-darkRed">
           Why Choose Us
         </h1>
@@ -65,9 +72,13 @@ function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </AnimationOnScroll>
 
-      <section className="container mx-auto flex flex-col-reverse md:flex-row justify-between gap-10 items-center mt-10 bg-gray-900">
+      <AnimationOnScroll
+        animateIn="animate__shakeY"
+        animateOut="animate__bounceOutRight"
+        className="container mx-auto flex  flex-col-reverse md:flex-row justify-between gap-10 items-center mt-16 bg-gray-900"
+      >
         <div className="shadow py-3  px-2 bg-gray-50 w-full">
           {whySubscribe.map((item) => (
             <div className="shadow-inner bg-white my-3 p-3" key={item.id}>
@@ -79,7 +90,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <form action="" className="w-full text-white px-4">
+        <form className="w-full text-white px-4">
           <h1 className="text-3xl text-center md:text-left font-bold text-darkRed">
             Subscribe to our News Letter
           </h1>
@@ -104,7 +115,7 @@ function Home() {
             Subscribe
           </button>
         </form>
-      </section>
+      </AnimationOnScroll>
     </Fragment>
   );
 }
